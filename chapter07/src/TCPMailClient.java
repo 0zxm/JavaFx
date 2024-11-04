@@ -28,6 +28,11 @@ public class TCPMailClient {
             System.out.println("发送消息失败");
             e.printStackTrace();
         }
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
