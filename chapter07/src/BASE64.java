@@ -5,6 +5,8 @@ public class BASE64 {
     public static void main(String[] args) {
         String usrName = "m15813109801@163.com";
         String passwd = "MYnwt6tQtEHKZpLN";
+//        String usrName = "2378173954@qq.com";
+//        String passwd = "syveljrcjezcdjae";
 
         String encodedUsrName = encode(usrName);
         String encodedPasswd = encode(passwd);

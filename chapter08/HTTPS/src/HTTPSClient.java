@@ -16,7 +16,7 @@ public class HTTPSClient {
         sslSocketFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
         // 创造SSL套接字对象
         sslSocket = (SSLSocket) sslSocketFactory.createSocket(ip, Integer.parseInt(port));
-        pw = new PrintWriter(new OutputStreamWriter(sslSocket.getOutputStream(), StandardCharsets.UTF_8));
+        pw = new PrintWriter(new OutputStreamWriter(sslSocket.getOutputStream(), StandardCharsets.UTF_8), true);
         br = new BufferedReader(new InputStreamReader(sslSocket.getInputStream(), StandardCharsets.UTF_8));
         // 开始SSL握手
         sslSocket.startHandshake();

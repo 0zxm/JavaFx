@@ -6,25 +6,26 @@ import java.nio.charset.StandardCharsets;
 public class TCPMailClient {
     // 定义SSL套接字
     private final SSLSocket sslSocket;
+    private final SSLSocketFactory sslSocketFactory;
     private final PrintWriter pw; // 定义字符输出流
     private final BufferedReader br; // 定义字符输入流
 
     public TCPMailClient(String ip, String port) throws IOException {
         // 创建工厂对象()使用静态方法getDefault()获取默认的SSL套接字工厂
         // 定义SSL套接字工厂
-        SSLSocketFactory sslSocketFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
+        sslSocketFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
         // 创造SSL套接字对象
         sslSocket = (SSLSocket) sslSocketFactory.createSocket(ip, Integer.parseInt(port));
-        pw = new PrintWriter(new OutputStreamWriter(sslSocket.getOutputStream(), StandardCharsets.UTF_8));
+        pw = new PrintWriter(new OutputStreamWriter(sslSocket.getOutputStream(), StandardCharsets.UTF_8), true);
         br = new BufferedReader(new InputStreamReader(sslSocket.getInputStream(), StandardCharsets.UTF_8));
         // 开始SSL握手
-        sslSocket.startHandshake();
+        // sslSocket.startHandshake();
     }
 
     public void send(String message) {
         try {
-            pw.print(message + "\r\n");
-        }catch (Exception e) {
+            pw.println(message);
+        } catch (Exception e) {
             System.out.println("发送消息失败");
             e.printStackTrace();
         }
